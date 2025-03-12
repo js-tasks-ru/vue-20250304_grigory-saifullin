@@ -7,16 +7,16 @@ export default defineComponent({
   setup() {
     const data = getWeatherData()
 
-    const tempCelsius = index => {
-      return (data[index].current.temp - 273.15).toFixed(1)
+    const tempCelsius = tempF => {
+      return (tempF - 273.15).toFixed(1)
     }
 
     const getWeatherIcons = id => {
       return WeatherConditionIcons[id]
     }
 
-    const mmPressure = index => {
-      return (data[index].current.pressure * 0.75).toFixed(0)
+    const mmPressure = pressure => {
+      return (pressure * 0.75).toFixed(0)
     }
 
     const checkNight = (dt, sunrise, sunset) => {
@@ -48,7 +48,8 @@ export default defineComponent({
       <ul class="weather-list unstyled-list">
         <li v-for="(city, i) in data"
             class="weather-card"
-            :class="checkNight(city.current.dt, city.current.sunrise, city.current.sunset) ? 'weather-card--night' : '' ">
+            :class="{'weather-card--night': checkNight(city.current.dt, city.current.sunrise, city.current.sunset)}"
+            >
           <div v-if="city.alert" class="weather-alert">
             <span class="weather-alert__icon">⚠️</span>
             <span class="weather-alert__description">{{ city.alert.sender_name }}: {{ city.alert.description }}</span>
@@ -63,12 +64,12 @@ export default defineComponent({
           </div>
           <div class="weather-conditions">
             <div class="weather-conditions__icon" :title="city.current.weather.description">{{ getWeatherIcons(city.current.weather.id) }}</div>
-            <div class="weather-conditions__temp"> {{ tempCelsius(i) }} °C</div>
+            <div class="weather-conditions__temp"> {{ tempCelsius(data[i].current.temp) }} °C</div>
           </div>
           <div class="weather-details">
             <div class="weather-details__item">
               <div class="weather-details__item-label">Давление, мм рт. ст.</div>
-              <div class="weather-details__item-value">{{ mmPressure(i) }}</div>
+              <div class="weather-details__item-value">{{ mmPressure(data[i].current.pressure) }}</div>
             </div>
             <div class="weather-details__item">
               <div class="weather-details__item-label">Влажность, %</div>
