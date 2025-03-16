@@ -53,10 +53,10 @@ export default defineComponent({
       <input type="number" aria-label="First operand" v-model="firstOperand"/>
 
       <div class="calculator__operators">
-        <label><input type="radio" name="operator" value="sum" @input="modifyOperator($event)"/>➕</label>
-        <label><input type="radio" name="operator" value="subtract" @input="modifyOperator($event)"/>➖</label>
-        <label><input type="radio" name="operator" value="multiply" @input="modifyOperator($event)"/>✖</label>
-        <label><input type="radio" name="operator" value="divide" @input="modifyOperator($event)"/>➗</label>
+        <label><input type="radio" name="operator" value="sum" v-model="operator"/>➕</label>
+        <label><input type="radio" name="operator" value="subtract" v-model="operator"/>➖</label>
+        <label><input type="radio" name="operator" value="multiply" v-model="operator"/>✖</label>
+        <label><input type="radio" name="operator" value="divide" v-model="operator"/>➗</label>
       </div>
 
       <input type="number" aria-label="Second operand" v-model="secondOperand"/>

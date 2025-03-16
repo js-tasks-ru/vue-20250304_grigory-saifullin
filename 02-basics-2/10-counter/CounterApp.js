@@ -6,8 +6,8 @@ export default defineComponent({
   setup() {
     const counter = ref(0);
 
-    const modifyCounter = (event) => {
-      switch (event.target.getAttribute('aria-label')) {
+    const modifyCounter = (flag) => {
+      switch (flag) {
 
         case 'Decrement':
           counter.value--;
@@ -33,7 +33,7 @@ export default defineComponent({
         type="button"
         aria-label="Decrement"
         :disabled="counter <= 0"
-        @click="modifyCounter($event)"
+        @click="modifyCounter('Decrement')"
       >➖</button>
 
       <span class="count" data-testid="count">{{ counter }}</span>
@@ -43,7 +43,7 @@ export default defineComponent({
         type="button"
         aria-label="Increment"
         :disabled="counter >= 5"
-        @click="modifyCounter($event)"
+        @click="modifyCounter('Increment')"
       >➕</button>
 
     </div>
