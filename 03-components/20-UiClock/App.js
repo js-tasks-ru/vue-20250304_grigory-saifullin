@@ -21,7 +21,19 @@ export default defineComponent({
         <input type="checkbox" v-model="showClock" />
         Отображать часы
       </label>
-      <UiClock v-if="showClock" />
+      <UiClock v-if="showClock"/>
     </div>
   `,
 })
+
+//
+// if (props.showClock) {
+//   if (!intervalId) {
+//
+//   }
+// } else {
+//   if (intervalId) {
+//     clearInterval(intervalId)
+//     intervalId = null
+//   }
+// }

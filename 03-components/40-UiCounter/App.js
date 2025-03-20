@@ -1,4 +1,4 @@
-import { defineComponent, ref } from 'vue'
+import {computed, defineComponent, ref} from 'vue'
 import { UiButton } from '@shgk/vue-course-ui'
 import UiCounter from './UiCounter.js'
 
@@ -29,7 +29,7 @@ export default defineComponent({
   template: `
     <div>
       <p style="margin: 1em 0">
-        <UiCounter v-model:count="count1" />
+        <UiCounter v-model:count="count1" @update-counter=""/>
       </p>
       <p style="margin: 1em 0">
         <UiCounter v-model:count="count2" :min="1" :max="3" />
