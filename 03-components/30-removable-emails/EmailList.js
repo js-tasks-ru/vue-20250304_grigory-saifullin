@@ -15,7 +15,7 @@ export default defineComponent({
     },
   },
 
-  emits: ['deleteEmail'],
+  emits: ['deleteEmails'],
 
   setup(props, { emit }) {
 
