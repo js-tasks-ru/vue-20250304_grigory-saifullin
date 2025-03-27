@@ -20,7 +20,7 @@ export default defineComponent({
   setup(props, { emit }) {
 
     const sendEmailIndex = (index) => {
-      emit('deleteEmail', index)
+      emit('deleteEmails', index)
     }
 
     return {
@@ -35,7 +35,7 @@ export default defineComponent({
         :key="email"
         :email="email"
         :marked="isMarked"
-        @delete-email-="sendEmailIndex(index)"
+        @delete-email="sendEmailIndex(index)"
       />
     </ul>
   `,
