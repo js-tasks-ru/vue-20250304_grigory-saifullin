@@ -15,12 +15,12 @@ export default defineComponent({
     },
   },
 
-  emits: ['update-emails'],
+  emits: ['updateEmails'],
 
   setup(props, { emit }) {
 
     const sendEmailIndex = (index) => {
-      emit('update-emails', index)
+      emit('updateEmails', index)
     }
 
     return {

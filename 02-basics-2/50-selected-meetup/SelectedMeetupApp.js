@@ -1,4 +1,4 @@
-import {defineComponent, ref, watchEffect} from 'vue'
+import {computed, defineComponent, ref, watchEffect} from 'vue'
 import { getMeetup } from './meetupsService.ts'
 
 export default defineComponent({
@@ -8,17 +8,24 @@ export default defineComponent({
 
     const selectedMeetup = ref('1');
     const meetupTitle = ref();
-    const disableButtons = ref({
-      prev: false,
-      next: false,
-    })
+    const loading = ref(false);
+
+    const disabledBtnPrev = computed( () => selectedMeetup.value <= 1 || loading.value)
+
+    const disabledBtnNext = computed(() => selectedMeetup.value >= 5 || loading.value)
 
     watchEffect(async () => {
-      const data = await getMeetup(selectedMeetup.value);
-      meetupTitle.value = data.title;
+      loading.value = true;
 
-      disableButtons.value.prev = Number(selectedMeetup.value) <= 1;
-      disableButtons.value.next = Number(selectedMeetup.value) >= 5;
+      try {
+        const data = await getMeetup(selectedMeetup.value);
+        meetupTitle.value = data.title;
+      } catch (e) {
+        meetupTitle.value = 'Произошла ошибка';
+      } finally {
+        loading.value = false;
+      }
+
     })
 
     const slideMeetup = (flag) => {
@@ -37,7 +44,8 @@ export default defineComponent({
     return {
       selectedMeetup,
       meetupTitle,
-      disableButtons,
+      disabledBtnPrev,
+      disabledBtnNext,
       slideMeetup
     }
 
@@ -49,7 +57,7 @@ export default defineComponent({
         <button
           class="button button--secondary"
           type="button"
-          :disabled="disableButtons.prev"
+          :disabled="disabledBtnPrev"
           @click="slideMeetup('Decrement')"
         >Предыдущий</button>
 
@@ -114,7 +122,7 @@ export default defineComponent({
         <button
           class="button button--secondary"
           type="button"
-          :disabled="disableButtons.next"
+          :disabled="disabledBtnNext"
           @click="slideMeetup('Increment')"
         >Следующий</button>
       </div>

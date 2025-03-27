@@ -31,24 +31,16 @@ export default defineComponent({
   setup(props, { emit }) {
     // Рекомендуется для практики реализовать обработку событий внутри setup, а не непосредственно в шаблоне
 
-    const disabledBtnMin = computed(() => {
-      if (props.count === props.min) return true
-    })
+    const disabledBtnMin = computed(() => props.count === props.min);
 
-    const disabledBtnMax = computed(() => {
-      if (props.count === props.max) return true
-    })
+    const disabledBtnMax = computed(() => props.count === props.max);
 
     const decrement = () => {
-      if (props.count > props.min) {
-        emit('update:count', props.count - 1);
-      }
+      emit('update:count', props.count - 1);
     };
 
     const increment = () => {
-      if (props.count < props.max) {
-        emit('update:count', props.count + 1);
-      }
+      emit('update:count', props.count + 1);
     };
 
     return {

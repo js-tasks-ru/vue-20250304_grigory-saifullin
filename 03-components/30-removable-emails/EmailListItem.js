@@ -15,9 +15,11 @@ export default defineComponent({
     },
   },
 
+  emits: ['updateEmails'],
+
   setup(props, {emit}) {
     const removeEmail = () => {
-      emit('update-emails')
+      emit('updateEmails')
     }
 
     return {
