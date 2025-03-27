@@ -14,7 +14,7 @@ export default defineComponent({
     const count1 = ref(1)
     const count2 = ref(2)
 
-    function reset() {
+    const reset = () => {
       count1.value = 1
       count2.value = 2
     }

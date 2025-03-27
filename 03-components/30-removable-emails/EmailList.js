@@ -15,6 +15,19 @@ export default defineComponent({
     },
   },
 
+  emits: ['updateEmails'],
+
+  setup(props, { emit }) {
+
+    const sendEmailIndex = (index) => {
+      emit('updateEmails', index)
+    }
+
+    return {
+      sendEmailIndex
+    }
+  },
+
   template: `
     <ul class="emails-list unstyled-list" aria-label="Emails">
       <EmailListItem
@@ -22,6 +35,7 @@ export default defineComponent({
         :key="email"
         :email="email"
         :marked="isMarked"
+        @update-emails="sendEmailIndex(index)"
       />
     </ul>
   `,
